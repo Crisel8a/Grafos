@@ -1,21 +1,15 @@
-def dfs(node, graph_adj, visited):
-    stack = [node]
+def DFS(root, targetValue):
+    print(f"Actualmente estoy en el nodo con valor: {root.valor}")
 
-    while stack:
-        node = stack.pop()
+    if root.valor == targetValue:
+        print(f"¡Encontré el valor {targetValue}!")
+        return root
 
-        if not visited[node]:
-            visited[node] = True
-            print("Visiting Node", node)
+    for i in range(len(root.children)):
+        childNode = root.children[i]
+        resultNode = DFS(childNode, targetValue)
 
-            for j in range(len(graph_adj[node])):
-                if graph_adj[node][j] == 1:
-                    stack.append(j)
+        if resultNode is not None:
+            return resultNode
 
-
-# Ejemplo de uso
-graph_adj = [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]]
-
-visited = [False] * len(graph_adj)
-
-dfs(0, graph_adj, visited)
+    return None
